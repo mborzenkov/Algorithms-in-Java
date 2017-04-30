@@ -19,5 +19,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="checkstyle-7.6.1-all" level="project" />
   </component>
 </module>
