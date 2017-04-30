@@ -7,16 +7,18 @@ import java.util.Arrays;
 /** This is static utility class with different sorting algorithms.
  *  Each method modifying input array such as for each i, input[i] <= input[i+1]
  */
-public class Sortings {
+class Sortings {
 
-    /** Defines size of array when merge sort should switch to insertion sort */
+    /** Defines size of array when merge sort should switch to insertion sort. */
     private static final int MERGE_TO_INSERTION_THRESHOLD = 10;
 
     // Thread safety argument:
-    //      This class is thread safe, because it have no instances (everithing static).
-    //      Noninstantability is enforced with private constructor.
+    //      This class is thread safe, because it have no instances (everything static).
+    //      Noninstantiability is enforced with private constructor.
 
-    private Sortings() { throw new RuntimeException("Sortings is noninstantiable"); }
+    private Sortings() {
+        throw new RuntimeException("Sortings is noninstantiable");
+    }
 
     /** Sorts input array, using insertion sort
      * This method is effective for sorting small arrays.
@@ -40,12 +42,12 @@ public class Sortings {
         if (right <= input.length && left >= 0 && left < right - 1) {
             for (int j = left + 1; j < right; j++) {
                 int key = input[j];
-                int i = j-1;
+                int i = j - 1;
                 while (i >= left && input[i] > key) {
-                    input[i+1] = input[i];
+                    input[i + 1] = input[i];
                     i--;
                 }
-                input[i+1] = key;
+                input[i + 1] = key;
             }
         }
     }
@@ -63,8 +65,8 @@ public class Sortings {
                 swapped = false;
                 for (int i = 1; i < length; i++) {
                     if (input[i - 1] > input[i]) {
-                        int tmp = input[i-1];
-                        input[i-1] = input[i];
+                        int tmp = input[i - 1];
+                        input[i - 1] = input[i];
                         input[i] = tmp;
                         swapped = true;
                     }
@@ -91,7 +93,7 @@ public class Sortings {
                 if (j != smallest) {
                     int tmp = input[j];
                     input[j] = input[smallest];
-                    input[smallest] = input[j];
+                    input[smallest] = tmp;
                 }
             }
         }
@@ -139,7 +141,9 @@ public class Sortings {
     private static void merge(int[] input, int left, int middle, int right) {
         int[] leftArray = Arrays.copyOfRange(input, left, middle);
         int[] rightArray = Arrays.copyOfRange(input, middle, right);
-        int i = 0, j = 0, k = left;
+        int i = 0;
+        int j = 0;
+        int k = left;
         while (k < right && i < leftArray.length && j < rightArray.length) {
             if (leftArray[i] <= rightArray[j]) {
                 input[k] = leftArray[i];
@@ -150,14 +154,12 @@ public class Sortings {
             }
             k++;
         }
-        while (i < leftArray.length)
-        {
+        while (i < leftArray.length) {
             input[k] = leftArray[i];
             i++;
             k++;
         }
-        while (j < rightArray.length)
-        {
+        while (j < rightArray.length) {
             input[k] = rightArray[j];
             j++;
             k++;
