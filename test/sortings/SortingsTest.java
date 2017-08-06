@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.Test;
 
-/** Tests all sorting algorithms in Sortings.java. */
+/** Tests all sorting algorithms in sortings package. */
 public class SortingsTest {
 
     // TODO: Consider using JMH for proper benchmarking
@@ -15,7 +15,7 @@ public class SortingsTest {
      */
 
     /** Size of arrays, positive. */
-    private static final int ARRAYS_SIZE = 100000;
+    private static final int ARRAYS_SIZE = 10000;
     /** Size of arrays formatted. */
     private static final String ARRAYS_SIZE_FORMATTED = String.format("%.0e", (float) ARRAYS_SIZE);
     /** True == print execution time on out. */
@@ -92,8 +92,8 @@ public class SortingsTest {
         testSortOnArray(SIZE1_ARRAY, "SIZE1_ARRAY", SortingTypes.MERGE);
     }
 
-    // @Test - this test is long, so it is turned off
     /** Testing selection sort algorithm. */
+    @Test // this test is long
     @SuppressWarnings("unused")
     public void testSelectionSort() {
         testSortOnArray(SORTED_ARRAY, "SORTED_ARRAY", SortingTypes.SELECTION);
@@ -103,8 +103,8 @@ public class SortingsTest {
         testSortOnArray(SIZE1_ARRAY, "SIZE1_ARRAY", SortingTypes.SELECTION);
     }
 
-    // @Test - this test is long, so it is turned off
     /** Testing bubble sort algorithm. */
+    @Test // this test is long
     @SuppressWarnings("unused")
     public void testBubbleSort() {
         testSortOnArray(SORTED_ARRAY, "SORTED_ARRAY", SortingTypes.BUBBLE);
@@ -128,16 +128,16 @@ public class SortingsTest {
                 Arrays.sort(array);
                 break;
             case INSERTION:
-                Sortings.insertionSort(array);
+                InsertionSort.sort(array);
                 break;
             case MERGE:
-                Sortings.mergeSort(array);
+                MergeSort.sort(array);
                 break;
             case SELECTION:
-                Sortings.selectionSort(array);
+                SelectionSort.sort(array);
                 break;
             case BUBBLE:
-                Sortings.bubbleSort(array);
+                BubbleSort.sort(array);
                 break;
             default:
                 throw new RuntimeException("unknown sorting type");
