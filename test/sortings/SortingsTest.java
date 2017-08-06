@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.Test;
 
-/** Tests all sorting algorithms in Sortings.java. */
+/** Tests all sorting algorithms in sortings package. */
 public class SortingsTest {
 
     // TODO: Consider using JMH for proper benchmarking
@@ -128,16 +128,16 @@ public class SortingsTest {
                 Arrays.sort(array);
                 break;
             case INSERTION:
-                Sortings.insertionSort(array);
+                InsertionSort.sort(array);
                 break;
             case MERGE:
-                Sortings.mergeSort(array);
+                MergeSort.sort(array);
                 break;
             case SELECTION:
-                Sortings.selectionSort(array);
+                SelectionSort.sort(array);
                 break;
             case BUBBLE:
-                Sortings.bubbleSort(array);
+                BubbleSort.sort(array);
                 break;
             default:
                 throw new RuntimeException("unknown sorting type");
