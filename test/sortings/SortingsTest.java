@@ -15,7 +15,7 @@ public class SortingsTest {
      */
 
     /** Size of arrays, positive. */
-    private static final int ARRAYS_SIZE = 100000;
+    private static final int ARRAYS_SIZE = 10000;
     /** Size of arrays formatted. */
     private static final String ARRAYS_SIZE_FORMATTED = String.format("%.0e", (float) ARRAYS_SIZE);
     /** True == print execution time on out. */
@@ -92,8 +92,8 @@ public class SortingsTest {
         testSortOnArray(SIZE1_ARRAY, "SIZE1_ARRAY", SortingTypes.MERGE);
     }
 
-    // @Test - this test is long, so it is turned off
     /** Testing selection sort algorithm. */
+    @Test // this test is long
     @SuppressWarnings("unused")
     public void testSelectionSort() {
         testSortOnArray(SORTED_ARRAY, "SORTED_ARRAY", SortingTypes.SELECTION);
@@ -103,8 +103,8 @@ public class SortingsTest {
         testSortOnArray(SIZE1_ARRAY, "SIZE1_ARRAY", SortingTypes.SELECTION);
     }
 
-    // @Test - this test is long, so it is turned off
     /** Testing bubble sort algorithm. */
+    @Test // this test is long
     @SuppressWarnings("unused")
     public void testBubbleSort() {
         testSortOnArray(SORTED_ARRAY, "SORTED_ARRAY", SortingTypes.BUBBLE);

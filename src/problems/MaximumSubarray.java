@@ -14,7 +14,7 @@ public class MaximumSubarray {
      *      Noninstantiability is enforced with private constructor.
      */
 
-    private MaximumSubarray() { }
+    private MaximumSubarray() { throw new RuntimeException("MaximumSubarray is noninstantiable"); }
 
     /** Unmodifiable datatype for result of {@link MaximumSubarray#find(int[])}.
      * indexFrom and indexTo are in [0, A.length-1]
