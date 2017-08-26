@@ -2,21 +2,30 @@ package matrices;
 
 import com.sun.istack.internal.NotNull;
 
+import java.util.Arrays;
+
 // also can be a vector;; modifiable
+// TODO: Jdoc and checks
 public class Matrix {
 
     private final int[][] content;
 
-    public static Matrix fromArray(@NotNull int[][] bidemArray) {
-        throw new RuntimeException("not implemented");
+    public static Matrix fromArray(@NotNull int[][] array) {
+        final int rows = array.length;
+        final int cols = array[0].length;
+        final int[][] content = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            System.arraycopy(array[i], 0, content[i], 0, cols);
+        }
+        return new Matrix(content);
     }
 
     public static Matrix fromMatrix(@NotNull Matrix matrix) {
-        throw new RuntimeException("not implemented");
+        return Matrix.fromArray(matrix.content);
     }
 
-    public static Matrix empty(int rows, int columns) {
-        throw new RuntimeException("not implemented");
+    public static Matrix empty(int rows, int cols) {
+        return new Matrix(new int[rows][cols]);
     }
 
     private Matrix(int[][] content) {
@@ -32,35 +41,35 @@ public class Matrix {
     }
 
     public int getRowCount() {
-        throw new RuntimeException("not implemented");
+        return content.length;
     }
 
     public int getColumnCount() {
-        throw new RuntimeException("not implemented");
-    }
-
-    // vector
-    public int[] getColumn(int index) {
-        throw new RuntimeException("not implemented");
+        return content[0].length;
     }
 
     // vector
     public int[] getRow(int index) {
-        throw new RuntimeException("not implemented");
+        return content[index];
     }
 
     @Override
     public int hashCode() {
+        // TODO: HC, EQ, TS
         return super.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (!(obj instanceof Matrix)) {
+            return false;
+        }
+        Matrix thatObject = (Matrix) obj;
+        return Arrays.deepEquals(content, thatObject.content);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return Arrays.deepToString(content);
     }
 }
