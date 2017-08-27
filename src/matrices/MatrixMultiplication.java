@@ -3,6 +3,8 @@ package matrices;
 import com.sun.istack.internal.NotNull;
 import util.AlgorithmsUtils;
 
+import java.util.Arrays;
+
 /** This class contain methods for multiplying matrices.
  * Multiplication of two matrices A (size m * n) and B (size n * p) is matrix C (size m * p), each element of C
  * C.get(i, j) == SUM for k in [1, n] of A.get(i, k) * B.get(k, j)
@@ -89,8 +91,6 @@ public class MatrixMultiplication {
         return compute(matrA, matrB);
     }
 
-    // TODO: написать recursive, протестировать его + матрикс + утилс, оптимизировать, далее штрассен
-
     private static @NotNull Matrix compute(@NotNull Matrix matrA, @NotNull Matrix matrB) {
         final int n = matrA.getRowCount();
 
@@ -132,8 +132,8 @@ public class MatrixMultiplication {
     private static @NotNull Matrix splitMatrix(@NotNull Matrix matrix,
                                                int rowStart, int rowEnd, int colStart, int colEnd) {
         int[][] matrixData = new int[rowEnd - rowStart][colEnd - colStart];
-        for (int i = rowStart; i < rowEnd; i++) {
-            int[] oldRow = matrix.getRow(i);
+        for (int i = 0; i < rowEnd - rowStart; i++) {
+            int[] oldRow = matrix.getRow(rowStart + i);
             System.arraycopy(oldRow, colStart, matrixData[i], 0, colEnd - colStart);
         }
         return Matrix.fromArray(matrixData);
@@ -152,9 +152,9 @@ public class MatrixMultiplication {
         }
         for (int i = 0; i < matrC21.getRowCount(); i++) {
             int[] row21 = matrC21.getRow(i);
-            System.arraycopy(row21, 0, matrixData[i], 0, row21.length);
+            System.arraycopy(row21, 0, matrixData[matrC11.getRowCount() + i], 0, row21.length);
             int[] row22 = matrC22.getRow(i);
-            System.arraycopy(row22, 0, matrixData[i], row21.length, row22.length);
+            System.arraycopy(row22, 0, matrixData[matrC11.getRowCount() + i], row21.length, row22.length);
         }
         return Matrix.fromArray(matrixData);
     }
