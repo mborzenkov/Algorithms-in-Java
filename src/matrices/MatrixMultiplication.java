@@ -51,7 +51,7 @@ public class MatrixMultiplication {
     }
 
     /** Multiplies matrices matrA and matrB using recursive algorithm.
-     * This function accepts only square (n x n) matrices with each side is exact power of 2 (2, 4, 8, 16...).
+     * <b>This function accepts only square (n x n) matrices with each side is exact power of 2 (2, 4, 8, 16...).</b>
      * So when dividing n/2 recursively we ensure that result is an integer.
      *
      * @param matrA matrix, size n * n
@@ -66,97 +66,149 @@ public class MatrixMultiplication {
      */
     public static @NotNull Matrix multRecursiveSquaredPow2(@NotNull Matrix matrA, @NotNull Matrix matrB) {
         // Check validity of params
-        final int matrixOneRows = matrA.getRowCount();
-        final int matrixOneCols = matrA.getColumnCount();
-        final int matrixTwoRows = matrB.getRowCount();
-        final int matrixTwoCols = matrB.getColumnCount();
-        if (matrixOneRows != matrixOneCols) {
+        final int matrARows = matrA.getRowCount();
+        final int matrACols = matrA.getColumnCount();
+        final int matrBRows = matrB.getRowCount();
+        final int matrBCols = matrB.getColumnCount();
+        if (matrARows != matrACols) {
             throw new IllegalArgumentException(
                     "Error @ MatrixMultiplication.multRecursiveSquaredPow2() :: matrA is not square matrix");
         }
-        if (matrixTwoRows != matrixTwoCols) {
+        if (matrBRows != matrBCols) {
             throw new IllegalArgumentException(
                     "Error @ MatrixMultiplication.multRecursiveSquaredPow2() :: matrB is not square matrix");
         }
-        if (matrixOneRows != matrixTwoRows) {
+        if (matrARows != matrBRows) {
             throw new IllegalArgumentException(
                     "Error @ MatrixMultiplication.multRecursiveSquaredPow2() :: matrA & matrB dimensions not equal");
         }
-        if (!AlgorithmsUtils.isPowerOfTwo(matrixOneRows)) {
+        if (!AlgorithmsUtils.isPowerOfTwo(matrARows)) {
             throw new IllegalArgumentException(
                     "Error @ MatrixMultiplication.multRecursiveSquaredPow2() :: matrA & matrB dimens is not pow of 2");
         }
 
         // compute recursively
-        return compute(matrA, matrB);
+        return computeRecursiveSquaredPow2(
+                matrA, 0, matrARows, 0, matrACols,
+                matrB, 0, matrBRows, 0, matrBCols);
     }
 
-    private static @NotNull Matrix compute(@NotNull Matrix matrA, @NotNull Matrix matrB) {
-        final int n = matrA.getRowCount();
+    /** Recursive part of multRecursiveSquaredPow2 (recursive matrix multiplication).
+     * For restrictions of matrA and matrB see {@link MatrixMultiplication#multRecursiveSquaredPow2(Matrix, Matrix)}
+     *
+     * @param matrA matrix 1
+     * @param matrARowStart start row index of current part of matrA
+     * @param matrARowEnd end row index of current part of matrA
+     * @param matrAColStart start column index of current part of matrA
+     * @param matrAColEnd end column index of current part of matrA
+     * @param matrB matrix 2
+     * @param matrBRowStart start row index of current part of matrB
+     * @param matrBRowEnd end row index of current part of matrB
+     * @param matrBColStart start column index of current part of matrB
+     * @param matrBColEnd end column index of current part of matrB
+     *
+     * @return new Matrix as a result of multiplication matrA * matrB
+     */
+    private static @NotNull Matrix computeRecursiveSquaredPow2(
+            @NotNull Matrix matrA, int matrARowStart, int matrARowEnd, int matrAColStart, int matrAColEnd,
+            @NotNull Matrix matrB, int matrBRowStart, int matrBRowEnd, int matrBColStart, int matrBColEnd) {
 
-        if (n == 1) {
+        assert matrARowEnd > matrARowStart;
+        assert matrAColEnd > matrAColStart;
+        assert matrBRowEnd > matrBRowStart;
+        assert matrBColEnd > matrBColStart;
+
+        if ((matrARowEnd - matrARowStart) == 1) {
             return Matrix.fromArray(
-                    new int[][] {new int[] { matrA.get(0, 0) * matrB.get(0,0 ) }});
+                    new int[][] { new int[]
+                            { matrA.get(matrARowStart, matrAColStart) * matrB.get(matrBRowStart,matrBColStart) }});
         }
 
-        final int start = 0;
-        final int mid = n / 2;
+        int matrARowMid = matrARowStart + (matrARowEnd - matrARowStart) / 2;
+        int matrAColMid = matrAColStart + (matrAColEnd - matrAColStart) / 2;
+        int matrBRowMid = matrBRowStart + (matrBRowEnd - matrBRowStart) / 2;
+        int matrBColMid = matrBColStart + (matrBColEnd - matrBColStart) / 2;
 
         final Matrix c11 = MatrixAddition.sum(
-                compute(splitMatrix(matrA, start, mid, start, mid),  // (a11 *
-                        splitMatrix(matrB, start, mid, start, mid)), // b11) +
-                compute(splitMatrix(matrA, start, mid, mid, n),      // (a12 *
-                        splitMatrix(matrB, mid, n, start, mid)));    // b21)
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowStart, matrARowMid, matrAColStart, matrAColMid,  // (a11 *
+                        matrB, matrBRowStart, matrBRowMid, matrBColStart, matrBColMid), // b11) +
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowStart, matrARowMid, matrAColMid, matrAColEnd,    // (a12 *
+                        matrB, matrBRowMid, matrBRowEnd, matrBColStart, matrBColMid));  // b21)
 
         final Matrix c12 = MatrixAddition.sum(
-                compute(splitMatrix(matrA, start, mid, start, mid), // (a11 *
-                        splitMatrix(matrB, start, mid, mid, n)),    // b12) +
-                compute(splitMatrix(matrA, start, mid, mid, n),     // (a12 *
-                        splitMatrix(matrB, mid, n, mid, n)));       // b22)
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowStart, matrARowMid, matrAColStart, matrAColMid,  // (a11 *
+                        matrB, matrBRowStart, matrBRowMid, matrBColMid, matrBColEnd),   // b12) +
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowStart, matrARowMid, matrAColMid, matrAColEnd,    // (a12 *
+                        matrB, matrBRowMid, matrBRowEnd, matrBColMid, matrBColEnd));    // b22)
 
         final Matrix c21 = MatrixAddition.sum(
-                compute(splitMatrix(matrA, mid, n, start, mid),      // (a21 *
-                        splitMatrix(matrB, start, mid, start, mid)), // b11) +
-                compute(splitMatrix(matrA, mid, n, mid, n),          // (a22 *
-                        splitMatrix(matrB, mid, n, start, mid)));    // b21)
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowMid, matrARowEnd, matrAColStart, matrAColMid,    // (a21 *
+                        matrB, matrBRowStart, matrBRowMid, matrBColStart, matrBColMid), // b11) +
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowMid, matrARowEnd, matrAColMid, matrAColEnd,      // (a22 *
+                        matrB, matrBRowMid, matrBRowEnd, matrBColStart, matrBColMid));  // b21)
 
         final Matrix c22 = MatrixAddition.sum(
-                compute(splitMatrix(matrA, mid, n, start, mid),      // (a21 *
-                        splitMatrix(matrB, start, mid, mid, n)),     // b12) +
-                compute(splitMatrix(matrA, mid, n, mid, n),          // (a22 *
-                        splitMatrix(matrB, mid, n, mid, n)));        // b22)
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowMid, matrARowEnd, matrAColStart, matrAColMid,    // (a21 *
+                        matrB, matrBRowStart, matrBRowMid, matrBColMid, matrBColEnd),   // b12) +
+                computeRecursiveSquaredPow2(
+                        matrA, matrARowMid, matrARowEnd, matrAColMid, matrAColEnd,      // (a22 *
+                        matrB, matrBRowMid, matrBRowEnd, matrBColMid, matrBColEnd));    // b22)
 
         return mergeMatrices(c11, c12, c21, c22);
     }
 
-    private static @NotNull Matrix splitMatrix(@NotNull Matrix matrix,
-                                               int rowStart, int rowEnd, int colStart, int colEnd) {
-        int[][] matrixData = new int[rowEnd - rowStart][colEnd - colStart];
-        for (int i = 0; i < rowEnd - rowStart; i++) {
-            int[] oldRow = matrix.getRow(rowStart + i);
-            System.arraycopy(oldRow, colStart, matrixData[i], 0, colEnd - colStart);
-        }
-        return Matrix.fromArray(matrixData);
-    }
-
+    /** Merging matrices c11, c12, c21 and c22 in one matrix C.
+     * <b>All matrices must be squared and have equal dimensions.</b>
+     *
+     * @param matrC11 sub-matrix in left top corner
+     * @param matrC12 sub-matrix in right top corner
+     * @param matrC21 sub-matrix in left bottom corner
+     * @param matrC22 sub-matrix in right bottom corner
+     *
+     * @return new matrix containing values from all matrices as:
+     *      [ C11, C12 ],
+     *      [ C21, C22 ]
+     */
     private static @NotNull Matrix mergeMatrices(@NotNull Matrix matrC11, @NotNull Matrix matrC12, @NotNull Matrix matrC21, @NotNull Matrix matrC22) {
-        // TODO: првоерки параметров
-        final int rows = matrC11.getRowCount() + matrC21.getRowCount();
-        final int cols = matrC11.getColumnCount() + matrC12.getColumnCount();
-        int[][] matrixData = new int[rows][cols];
-        for (int i = 0; i < matrC11.getRowCount(); i++) {
+
+        assert matrC11.getRowCount() == matrC11.getColumnCount();
+        assert (matrC11.getRowCount() == matrC12.getRowCount())
+                && (matrC21.getRowCount() == matrC22.getRowCount())
+                && (matrC11.getRowCount() == matrC22.getRowCount());
+        assert (matrC11.getColumnCount() == matrC12.getColumnCount())
+                && (matrC21.getColumnCount() == matrC22.getColumnCount())
+                && (matrC11.getColumnCount() == matrC22.getColumnCount());
+
+        final int halfRows = matrC11.getRowCount();
+        final int halfCols = matrC11.getColumnCount();
+
+        int[][] matrixData = new int[halfRows * 2][halfCols * 2];
+
+        // Merging top part, C11 and C12
+        for (int i = 0; i < halfRows; i++) {
             int[] row11 = matrC11.getRow(i);
             System.arraycopy(row11, 0, matrixData[i], 0, row11.length);
             int[] row12 = matrC12.getRow(i);
             System.arraycopy(row12, 0, matrixData[i], row11.length, row12.length);
         }
-        for (int i = 0; i < matrC21.getRowCount(); i++) {
+
+        // Merging bottom part, C21 and C22
+        for (int i = 0; i < halfRows; i++) {
             int[] row21 = matrC21.getRow(i);
-            System.arraycopy(row21, 0, matrixData[matrC11.getRowCount() + i], 0, row21.length);
+            System.arraycopy(row21, 0, matrixData[halfRows + i], 0, row21.length);
             int[] row22 = matrC22.getRow(i);
-            System.arraycopy(row22, 0, matrixData[matrC11.getRowCount() + i], row21.length, row22.length);
+            System.arraycopy(row22, 0, matrixData[halfRows + i], row21.length, row22.length);
         }
+
         return Matrix.fromArray(matrixData);
+
     }
 
     /** Multiplies matrices matrA and matrB using Strassen algorithm.
