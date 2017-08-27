@@ -44,8 +44,8 @@ public class MatrixAdditionTest {
     // covers empty matrices (= 0)
     @Test
     public void testSumEmpty() {
-        final Matrix matrA = Matrix.empty(1,1);
-        final Matrix matrB = Matrix.empty(1,1);
+        final Matrix matrA = new Matrix.Builder(1, 1).build();
+        final Matrix matrB = new Matrix.Builder(1, 1).build();
         assertEquals(matrA, MatrixAddition.sum(matrA, matrB));
     }
 

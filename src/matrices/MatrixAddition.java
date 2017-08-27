@@ -35,13 +35,13 @@ public class MatrixAddition {
         }
         final int rows = matrA.getRowCount();
         final int cols = matrA.getColumnCount();
-        final Matrix result = Matrix.empty(rows, cols);
+        final Matrix.Builder result = new Matrix.Builder(rows, cols);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 result.set(i, j, matrA.get(i, j) + matrB.get(i, j));
             }
         }
-        return result;
+        return result.build();
     }
 
 }
