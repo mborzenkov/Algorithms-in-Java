@@ -5,7 +5,7 @@ import com.sun.istack.internal.NotNull;
 import java.util.Arrays;
 
 /** This class is solving the task of finding the contiguous subarray within one-dimensional array of numbers
- * which has the largest sum.
+ * which has the largest add.
  */
 public class MaximumSubarray {
 
@@ -14,7 +14,9 @@ public class MaximumSubarray {
      *      Noninstantiability is enforced with private constructor.
      */
 
-    private MaximumSubarray() { throw new RuntimeException("MaximumSubarray is noninstantiable"); }
+    private MaximumSubarray() {
+        throw new RuntimeException("MaximumSubarray is noninstantiable");
+    }
 
     /** Unmodifiable datatype for result of {@link MaximumSubarray#find(int[])}.
      * indexFrom and indexTo are in [0, A.length-1]
@@ -34,7 +36,7 @@ public class MaximumSubarray {
          * @param inputArray non-empty, non-null one-dimensional array of numbers
          * @param indexFrom starting index of result maximum subarray
          * @param indexTo ending index of result maximum subarray
-         * @param sum sum of elements in array from indexFrom to indexTo, including both
+         * @param sum add of elements in array from indexFrom to indexTo, including both
          */
         private MaxSubarrayResult(@NotNull int[] inputArray, int indexFrom, int indexTo, int sum) {
             assert indexFrom <= indexTo;
@@ -66,7 +68,7 @@ public class MaximumSubarray {
 
         @Override
         public String toString() {
-            return String.format("Subarray [%s, %s] sum is %s", indexFrom, indexTo, sum);
+            return String.format("Subarray [%s, %s] add is %s", indexFrom, indexTo, sum);
         }
     }
 
@@ -75,7 +77,7 @@ public class MaximumSubarray {
      * @param array non-empty, non-null one-dimensional array of numbers
      *              array is not modifying by this function
      *
-     * @return {@link MaxSubarrayResult} containing indexes of maximum subarray and sum of this subarray
+     * @return {@link MaxSubarrayResult} containing indexes of maximum subarray and add of this subarray
      *      if inputArray.length == 1, result.indexFrom == result.indexTo == 0
      *
      * @throws IllegalArgumentException if array.length == 0
@@ -96,7 +98,7 @@ public class MaximumSubarray {
      * @param indexFrom starting index of current subarray
      * @param indexTo ending index of current subarray
      *
-     * @return {@link MaxSubarrayResult} containing indexes of maximum subarray and sum of this subarray
+     * @return {@link MaxSubarrayResult} containing indexes of maximum subarray and add of this subarray
      *          if inputArray.length == 1, result.indexFrom == result.indexTo == 0
      *
      * @see MaximumSubarray#find(int[]) for public access
@@ -127,7 +129,7 @@ public class MaximumSubarray {
      * @param indexMid index of middle element in array
      * @param indexTo ending index of array
      *
-     * @return {@link MaxSubarrayResult} containing indexes of maximum subarray, containing middle element, and its sum
+     * @return {@link MaxSubarrayResult} containing indexes of maximum subarray, containing middle element, and its add
      */
     private static @NotNull MaxSubarrayResult findMaxCrossing(@NotNull int[] array,
                                                               int indexFrom, int indexMid, int indexTo) {

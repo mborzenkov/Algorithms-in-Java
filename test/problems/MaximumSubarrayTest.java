@@ -153,7 +153,7 @@ public class MaximumSubarrayTest {
     public void testToStringResult() {
         final int[] array = {0, 0, 1, 1, 1, 1, 0, 0, 0, 0};
         MaxSubarrayResult result = MaximumSubarray.find(array);
-        assertEquals("Subarray [2, 5] sum is 4", result.toString());
+        assertEquals("Subarray [2, 5] add is 4", result.toString());
     }
 
     // covers equals and hashCode of result

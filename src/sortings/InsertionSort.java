@@ -2,8 +2,6 @@ package sortings;
 
 import com.sun.istack.internal.NotNull;
 
-import java.util.Arrays;
-
 /** This class implementing insertion sort, modifying input array such as for each i, input[i] <= input[i+1].
  */
 class InsertionSort {
