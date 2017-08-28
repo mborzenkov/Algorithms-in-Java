@@ -76,10 +76,10 @@ public class Matrix {
      *
      * @param array non-empty rectangular array n * m
      *
+     * @return new matrix n * m
+     *
      * @throws IllegalArgumentException if array is empty or not rectangular
      * @throws NullPointerException if array is null
-     *
-     * @return new matrix n * m
      */
     public static Matrix fromArray(@NotNull int[][] array) {
         final int rows = array.length;
@@ -113,10 +113,10 @@ public class Matrix {
      * @param rowIndex index of row containing element
      * @param columnIndex index of column containing element
      *
+     * @return value of element
+     *
      * @throws IndexOutOfBoundsException if rowIndex < 0 or >= getRowCount
      * @throws IndexOutOfBoundsException if columnIndex < 0 or >= getColumnCount
-     *
-     * @return value of element
      */
     public int get(int rowIndex, int columnIndex) {
         return content[rowIndex][columnIndex];
@@ -143,9 +143,9 @@ public class Matrix {
      *
      * @param index index of row to return
      *
-     * @throws IndexOutOfBoundsException if index < 0 or >= getRowCount
-     *
      * @return row-vector (1 x getColumnCount()) representing row in matrix
+     *
+     * @throws IndexOutOfBoundsException if index < 0 or >= getRowCount
      */
     public int[] getRow(int index) {
         return Arrays.copyOf(content[index], content[index].length);

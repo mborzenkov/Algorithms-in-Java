@@ -18,9 +18,9 @@ public class AlgorithmsUtils {
      *
      * @param number positive integer
      *
-     * @throws IllegalArgumentException if number <= 0
-     *
      * @return true if number is power of 2, false otherwise
+     *
+     * @throws IllegalArgumentException if number <= 0
      */
     public static boolean isPowerOfTwo(int number) {
         if (number <= 0) {

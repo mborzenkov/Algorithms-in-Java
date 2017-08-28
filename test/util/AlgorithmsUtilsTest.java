@@ -10,6 +10,7 @@ public class AlgorithmsUtilsTest {
 
     // There are no common testing strategy for this class because all methods are serving distinct specific tasks.
 
+    @SuppressWarnings("CheckStyle")
     @Test
     public void testIsPowerOfTwo() {
         assertTrue(AlgorithmsUtils.isPowerOfTwo(1));
