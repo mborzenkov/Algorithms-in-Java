@@ -9,3 +9,8 @@ Examples of popular algorithms in Java. Currently specified, tested and implemen
     Merge
 ##  Tree
     -
+##  Matrix
+	Addition, Substraction
+	Multiplication
+##  Problem
+	Maximum subarray
