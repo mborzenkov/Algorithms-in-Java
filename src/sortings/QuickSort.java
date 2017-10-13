@@ -43,7 +43,7 @@ class QuickSort {
         while (right - left > QUICK_TO_INSERTION_THRESHOLD) {
             Random rand = new Random();
             swap(input, right - 1, left + rand.nextInt(right - left));
-            int part = partitionLomuto(input, left, right);
+            int part = partitionHoare(input, left, right);
             if (part - left < right - part) {
                 sort(input, left, part);
                 left = part;
@@ -66,7 +66,6 @@ class QuickSort {
      *
      * @return index of element result such as all input[left..result] <= pivot && input[result..right-1] >= pivot
      */
-    @SuppressWarnings("Unused")
     private static int partitionHoare(@NotNull int[] input, int left, int right) {
         int pivot = input[right - 1];
         int i = left - 1, j = right;
@@ -90,6 +89,7 @@ class QuickSort {
      *
      * @return index of element result such as all input[left..result] <= pivot && input[result..right-1] >= pivot
      */
+    @SuppressWarnings("Unused")
     private static int partitionLomuto(@NotNull int[] input, int left, int right) {
         int pivot = input[right - 1];
         int i = left, j = left;
@@ -119,6 +119,9 @@ class QuickSort {
      * @param j 0 <= index <= input.length - 1
      */
     private static void swap(@NotNull int[] input, int i, int j) {
+        if (input[i] == input[j]) {
+            return;
+        }
         int tmp = input[i];
         input[i] = input[j];
         input[j] = tmp;
