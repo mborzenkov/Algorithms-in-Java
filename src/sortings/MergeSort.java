@@ -9,7 +9,7 @@ import java.util.Arrays;
 class MergeSort {
 
     /** Defines size of array when merge sort should switch to insertion sort. */
-    private static final int MERGE_TO_INSERTION_THRESHOLD = 10;
+    private static final int MERGE_TO_INSERTION_THRESHOLD = 16;
 
     // Thread safety argument:
     //      This class is thread safe, because it have no instances (everything static).
@@ -20,35 +20,32 @@ class MergeSort {
     }
 
     /** Sorts input array, using merge sort
-     * This algorithm using divide & conquer paradigm. And it is recursive.
-     * Complexity: O(n log(n)); All cases similar.
+     * This algorithm using divide & conquer paradigm. Not recursive.
+     * Complexity: O(n log(n));
      *
      * @param input Array of ints
      */
     public static void sort(@NotNull int[] input) {
         if (input != null) {
-            sort(input, 0, input.length);
-        }
-    }
 
-    /** Merge sort implementation that sorts part of input from index left to index right.
-     * See sort(int[] input) for more details.
-     *
-     * @param input Array of ints to be sorted
-     * @param left Left index (from, included), must be >= 0 && < (right - 1)
-     * @param right Right index (to, excluded), must be <= input.length
-     */
-    private static void sort(@NotNull int[] input, int left, int right) {
-        if (left < (right - 1)) {
+            for (int k = 1, segment = (int) Math.pow(2, k);
+                 segment < input.length;
+                 k++, segment = (int) Math.pow(2, k)) {
 
-            if (right - left <= MERGE_TO_INSERTION_THRESHOLD) {
-                InsertionSort.sort(input, left, right); // uses insertion sort on arrays from threshold length
-            } else {
-                int middle = (left + right) / 2;
-                sort(input, left, middle);
-                sort(input, middle, right);
-                merge(input, left, middle, right);
+                for (int left = segment, right = Math.min(input.length, left + segment);
+                     left < input.length;
+                     left += 2 * segment, right = Math.min(input.length, left + segment)) {
+
+                    if (2 * segment <= MERGE_TO_INSERTION_THRESHOLD) {
+                        InsertionSort.sort(input, left - segment, right);
+                    } else {
+                        merge(input, left - segment, left, right);
+                    }
+
+                }
+
             }
+
         }
     }
 
