@@ -58,32 +58,32 @@ class MergeSort {
      *               must be >= left && <= (right - 1)
      * @param right Right index (to, excluded), must be <= input.length
      */
-    private static void merge(int[] input, int left, int middle, int right) {
-        int[] leftArray = Arrays.copyOfRange(input, left, middle);
-        int[] rightArray = Arrays.copyOfRange(input, middle, right);
-        int i = 0;
-        int j = 0;
-        int k = left;
-        while (k < right && i < leftArray.length && j < rightArray.length) {
-            if (leftArray[i] <= rightArray[j]) {
-                input[k] = leftArray[i];
+    private static void merge(@NotNull int[] input, final int left, final int middle, final int right) {
+        int[] result = new int[right - left];
+        int i = left;
+        int j = middle;
+        int k = 0;
+        while (k < right && i < middle && j < right) {
+            if (input[i] <= input[j]) {
+                result[k] = input[i];
                 i++;
             } else {
-                input[k] = rightArray[j];
+                result[k] = input[j];
                 j++;
             }
             k++;
         }
-        while (i < leftArray.length) {
-            input[k] = leftArray[i];
+        while (i < middle) {
+            result[k] = input[i];
             i++;
             k++;
         }
-        while (j < rightArray.length) {
-            input[k] = rightArray[j];
+        while (j < right) {
+            result[k] = input[j];
             j++;
             k++;
         }
+        System.arraycopy(result, 0, input, left, right - left);
     }
 
 }
