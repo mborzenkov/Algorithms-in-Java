@@ -34,7 +34,7 @@ public class RadixSortTest {
     }
 
     /** Size of arrays, positive. */
-    private static final int ARRAYS_SIZE = 100000;
+    private static final int ARRAYS_SIZE = 10000;
     /** Maximum length of strings. */
     private static final int STR_LENGTH = 100;
     /** First allowed character. */
