@@ -4,14 +4,16 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.Test;
 
-/** Tests all sorting algorithms in sortings package. */
+/** Tests sorting algorithms in sortings package except counting and radix. */
 public class SortingsTest {
 
     // TODO: Consider using JMH for proper benchmarking
 
     /* Testing strategy
-     *      All best cases and worse cases for algorithms.
+     *      Best cases and worse cases for algorithms.
      *      Random array.
+     *      Frequently repeating numbers.
+     *      Same numbers.
      */
 
     /** Size of arrays, positive. */
@@ -23,8 +25,9 @@ public class SortingsTest {
 
     /** Types of sortings. */
     private enum SortingTypes {
-        ARRAYS_SORT("Built-in Arrays.sort()"), INSERTION("Insertion Sort"), MERGE("Merge Sort"), BUBBLE("Bubble Sort"),
-                SELECTION("Selection Sort"), QUICK("Quick Sort");
+        ARRAYS_SORT("Built-in Arrays.sort()"), ARRAYS_PARALLEL_SORT("Built-in Arrays.parallelSort()"),
+        MERGE("Merge Sort"), QUICK("Quick Sort"),
+        INSERTION("Insertion Sort"), SELECTION("Selection Sort"), BUBBLE("Bubble Sort");
 
         /** String representation of sorting type. */
         private final String representation;
@@ -74,6 +77,12 @@ public class SortingsTest {
     @Test
     public void testBuiltInArraysSort() {
         testAllSorts(SortingTypes.ARRAYS_SORT);
+    }
+
+    /** Testing built-in Arrays.sort() algorithm. */
+    @Test
+    public void testBuiltInArraysParallelSort() {
+        testAllSorts(SortingTypes.ARRAYS_PARALLEL_SORT);
     }
 
     /** Testing insertion sort algorithm. */
@@ -131,6 +140,9 @@ public class SortingsTest {
         switch (sortingType) {
             case ARRAYS_SORT:
                 Arrays.sort(array);
+                break;
+            case ARRAYS_PARALLEL_SORT:
+                Arrays.parallelSort(array);
                 break;
             case INSERTION:
                 InsertionSort.sort(array);
