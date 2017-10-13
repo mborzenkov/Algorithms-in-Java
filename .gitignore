@@ -28,6 +28,9 @@ cmake-build-debug/
 # Mongo Explorer plugin:
 .idea/**/mongoSettings.xml
 
+# QAPlug plugin:
+.idea/**/qaplug_profiles.xml
+
 ## File-based project format:
 *.iws
 
