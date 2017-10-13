@@ -10,7 +10,7 @@ Examples of popular algorithms in Java. Currently specified, tested and implemen
 ##  Tree
     -
 ##  Matrix
-	Addition, Substraction
+	Addition, Subtraction
 	Multiplication
 ##  Problem
 	Maximum subarray
