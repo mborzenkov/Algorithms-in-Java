@@ -11,7 +11,7 @@ class InsertionSort {
     //      Noninstantiability is enforced with private constructor.
 
     private InsertionSort() {
-        throw new RuntimeException("MergeSort is noninstantiable");
+        throw new RuntimeException("InsertionSort is noninstantiable");
     }
 
     /** Sorts input array, using insertion sort

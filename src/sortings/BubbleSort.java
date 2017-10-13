@@ -11,7 +11,7 @@ class BubbleSort {
     //      Noninstantiability is enforced with private constructor.
 
     private BubbleSort() {
-        throw new RuntimeException("MergeSort is noninstantiable");
+        throw new RuntimeException("BubbleSort is noninstantiable");
     }
 
     /** Sorts input array, using bubble sort

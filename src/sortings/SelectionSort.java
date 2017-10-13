@@ -11,7 +11,7 @@ class SelectionSort {
     //      Noninstantiability is enforced with private constructor.
 
     private SelectionSort() {
-        throw new RuntimeException("MergeSort is noninstantiable");
+        throw new RuntimeException("SelectionSort is noninstantiable");
     }
 
     /** Sorts input array, using selection sort
