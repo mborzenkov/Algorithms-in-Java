@@ -66,12 +66,14 @@ class QuickSort {
      *
      * @return index of element result such as all input[left..result] <= pivot && input[result..right-1] >= pivot
      */
+    @SuppressWarnings("StatementWithEmptyBody") // empty for loops are made intentionally here
     private static int partitionHoare(@NotNull int[] input, int left, int right) {
         int pivot = input[right - 1];
-        int i = left - 1, j = right;
+        int i = left - 1;
+        int j = right;
         while (i < j) {
-            for (i++; i < j && input[i] < pivot; i++);
-            for (j--; i < j && input[j] > pivot; j--);
+            for (i++; i < j && input[i] < pivot; i++) { }
+            for (j--; i < j && input[j] > pivot; j--) { }
             if (i < j) {
                 swap(input, i, j);
             }
@@ -89,12 +91,13 @@ class QuickSort {
      *
      * @return index of element result such as all input[left..result] <= pivot && input[result..right-1] >= pivot
      */
-    @SuppressWarnings("Unused")
+    @SuppressWarnings("unused")
     private static int partitionLomuto(@NotNull int[] input, int left, int right) {
         int pivot = input[right - 1];
-        int i = left, j = left;
-        boolean swap = true;
-        int leftEqual = 0, rightEqual = 0;
+        int i = left;
+        int j = left;
+        int leftEqual = 0;
+        int rightEqual = 0;
         for ( ; i < right; i++) {
             if (input[i] < pivot) {
                 swap(input, i, j);
