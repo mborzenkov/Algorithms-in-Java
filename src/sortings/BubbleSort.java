@@ -22,19 +22,15 @@ class BubbleSort {
      */
     public static void sort(@NotNull int[] input) {
         if (input.length > 1) {
-            boolean swapped;
-            int length = input.length;
-            do {
-                swapped = false;
-                for (int i = 1; i < length; i++) {
-                    if (input[i - 1] > input[i]) {
-                        int tmp = input[i - 1];
-                        input[i - 1] = input[i];
-                        input[i] = tmp;
-                        swapped = true;
+            for (int i = 0; i + 1 < input.length; ++i) {
+                for (int j = 0; j + i + 1 < input.length; ++j) {
+                    if (input[j] > input[j + 1]) {
+                        int tmp = input[j + 1];
+                        input[j + 1] = input[j];
+                        input[j] = tmp;
                     }
                 }
-            } while (swapped);
+            }
         }
     }
 
