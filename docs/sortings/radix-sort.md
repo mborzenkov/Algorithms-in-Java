@@ -32,6 +32,6 @@ public static void radixSort(int[][] input, int k, int d) {
 }
 ```
 
-[Implementation](../src/sortings/RadixSort.java)
+[Implementation](src/sortings/RadixSort.java)
 
-[Testing class](../test/sortings/RadixSortTest.java)
+[Testing class](test/sortings/RadixSortTest.java)
