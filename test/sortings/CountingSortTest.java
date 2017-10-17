@@ -3,7 +3,6 @@ package sortings;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.Test;
-import util.KeyValue;
 
 /** Tests counting_sort-like sorting algorithms in sortings package. */
 @SuppressWarnings("CheckStyle")
@@ -25,43 +24,53 @@ public class CountingSortTest {
     /** True == print execution time on out. */
     private static final boolean PRINT_TIME = true;
 
-    /** Array of ints from 0 to KEYS_RANGE, contain duplicates. */
-    private static final KeyValue[] SORTED_ARRAY;
-    /** Array of ints from KEYS_RANGE to 0, contain duplicates. */
-    private static final KeyValue[] BACKWARDS_SORTED_ARRAY;
-    /** Array of same numbers. */
-    private static final KeyValue[] SAME_NUMBERS_ARRAY;
+    // All arrays are [ARRAY_SIZE][2], where [i][0] is key and [i][1] is value
+    // All arrays contain ints [-KEYS_RANGE/2..KEYS_RANGE/2] or [0..KEYS_RANGE] as keys
+    // All arrays contain i as values, representing position in original array.
+    // This values are used after sorting for comparing values in sorted and original array.
 
-    /** Array of random ints from 0 to Integer.MAX_VALUE, probably not unique numbers. */
-    private static final KeyValue[] RANDOM_ARRAY;
-    /** Array of ints from 0 to 10, numbers are repeating frequently. */
-    private static final KeyValue[] RANDOM_REPEATING_ARRAY;
+    /** Array of key-values, where keys from 0 to KEYS_RANGE, contain duplicates. */
+    private static final int[][] SORTED_ARRAY;
+    /** Array of key-values, where keys from KEYS_RANGE to 0, contain duplicates. */
+    private static final int[][] BACKWARDS_SORTED_ARRAY;
+    /** Array of same numbers. */
+    private static final int[][] SAME_NUMBERS_ARRAY;
+
+    /** Array of random key-values, where keys from 0 to Integer.MAX_VALUE, probably not unique numbers. */
+    private static final int[][] RANDOM_ARRAY;
+    /** Array of key-values, where keys from 0 to 10, numbers are repeating frequently. */
+    private static final int[][] RANDOM_REPEATING_ARRAY;
 
     /** Empty array. */
-    private static final KeyValue[] EMPTY_ARRAY = new KeyValue[0];
+    private static final int[][] EMPTY_ARRAY = new int[0][0];
     /** Size 1 array. */
-    private static final KeyValue[] SIZE1_ARRAY = new KeyValue[] {new KeyValue(101, 0)};
+    private static final int[][] SIZE1_ARRAY = new int[][] { new int[] { 101, 0 } };
 
     // All types of testing arrays, initialized with values
     static {
 
-        SORTED_ARRAY = new KeyValue[ARRAYS_SIZE];
-        BACKWARDS_SORTED_ARRAY = new KeyValue[ARRAYS_SIZE];
-        SAME_NUMBERS_ARRAY = new KeyValue[ARRAYS_SIZE];
+        SORTED_ARRAY = new int[ARRAYS_SIZE][2];
+        BACKWARDS_SORTED_ARRAY = new int[ARRAYS_SIZE][2];
+        SAME_NUMBERS_ARRAY = new int[ARRAYS_SIZE][2];
 
-        RANDOM_ARRAY = new KeyValue[ARRAYS_SIZE];
-        RANDOM_REPEATING_ARRAY = new KeyValue[ARRAYS_SIZE];
+        RANDOM_ARRAY = new int[ARRAYS_SIZE][2];
+        RANDOM_REPEATING_ARRAY = new int[ARRAYS_SIZE][2];
         Random randomizer = new Random();
 
         for (int i = 0, j = 0; i < ARRAYS_SIZE; i++) {
+            SORTED_ARRAY[i][0] = j;
+            SORTED_ARRAY[i][1] = i;
+            BACKWARDS_SORTED_ARRAY[ARRAYS_SIZE - 1 - i][0] = j;
+            BACKWARDS_SORTED_ARRAY[ARRAYS_SIZE - 1 - i][1] = ARRAYS_SIZE - 1 - i;
+            SAME_NUMBERS_ARRAY[i][0] = 1;
+            SAME_NUMBERS_ARRAY[i][1] = i;
+            RANDOM_ARRAY[i][0] = randomizer.nextInt() % (KEYS_RANGE / 2);
+            RANDOM_ARRAY[i][1] = i;
+            RANDOM_REPEATING_ARRAY[i][0] = randomizer.nextInt(10);
+            RANDOM_REPEATING_ARRAY[i][1] = i;
             if (i % KEYS_RANGE == 0) {
                 j++;
             }
-            SORTED_ARRAY[i] = new KeyValue(j, i);
-            BACKWARDS_SORTED_ARRAY[ARRAYS_SIZE - 1 - i] = new KeyValue(j, ARRAYS_SIZE - 1 - i);
-            SAME_NUMBERS_ARRAY[i] = new KeyValue(1, i);
-            RANDOM_ARRAY[i] = new KeyValue(randomizer.nextInt() % (KEYS_RANGE / 2), i);
-            RANDOM_REPEATING_ARRAY[i] = new KeyValue(randomizer.nextInt(10), i);
         }
 
     }
@@ -83,20 +92,22 @@ public class CountingSortTest {
      *
      * @param inputArray Array to be sorted (not modified by this method)
      * @param nameOfArray Name of array to print in results (if print is enabled)
+     * @param keysFrom integer <= min( keys of input )
+     * @param keysTo integer >= max( keys of input )
      */
-    private void testSortOnArray(KeyValue[] inputArray, String nameOfArray, int keysFrom, int keysTo) {
-        KeyValue[] array = Arrays.copyOf(inputArray, inputArray.length);
+    private void testSortOnArray(int[][] inputArray, String nameOfArray, int keysFrom, int keysTo) {
+        int[][] array = Arrays.copyOf(inputArray, inputArray.length);
         long start = System.currentTimeMillis();
-        CountingSort.sort(array, keysFrom, keysTo);
+        CountingSort.sort(array, keysFrom, keysTo, 0);
 
         long end = System.currentTimeMillis();
         if (PRINT_TIME) {
-            System.out.println("SIZE: " + ARRAYS_SIZE_FORMATTED + " ints. TIME: " + (end - start) + " ms. Sorted "
+            System.out.println("SIZE: " + ARRAYS_SIZE_FORMATTED + " objects. TIME: " + (end - start) + " ms. Sorted "
                     + nameOfArray);
         }
         for (int i = 0; i < inputArray.length - 1; i++) {
-            assert array[i].getKey() <= array[i + 1].getKey();
-            assert array[i] == inputArray[((Integer) array[i].getValue())];
+            assert array[i][0] <= array[i + 1][0];
+            assert array[i][1] == inputArray[array[i][1]][1];
         }
     }
 
