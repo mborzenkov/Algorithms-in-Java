@@ -28,21 +28,26 @@ class RadixSort {
     public static void sort(@NotNull String[] input, int charFrom, int charTo, int stringsSize) {
         if (input != null) {
 
+            // Convert strings to 2d int arrays
             int range = charTo - charFrom;
             int[][] inputAsChars = new int[input.length][stringsSize];
             for (int i = 0; i < input.length; i++) {
                 for (int j = 0, length = input[i].length(); j < stringsSize && j < length; j++) {
+                    // each element in 2d int array is char[i,j] - charFrom + 1 && empty == 0
                     inputAsChars[i][j] = input[i].charAt(j) - charFrom + 1;
                 }
             }
 
+            // sort input array of ints
             for (int i = stringsSize - 1; i >= 0; i--) {
                 CountingSort.sort(inputAsChars, 0, range + 1, i);
             }
 
+            // recover the result
             for (int i = 0; i < input.length; i++) {
                 StringBuilder builder = new StringBuilder();
                 for (int j = 0; j < stringsSize && inputAsChars[i][j] != 0; j++) {
+                    // recover each char as res[i,j] + charFrom - 1 && if res[i,j] == 0, skip to next string
                     builder.append((char) (inputAsChars[i][j] + charFrom - 1));
                 }
                 input[i] = builder.toString();
