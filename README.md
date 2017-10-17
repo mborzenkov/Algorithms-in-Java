@@ -4,11 +4,11 @@ Examples of popular algorithms in Java. Specified, tested and implemented.
     -
 ##  Sorting
     Bubble
-    [Counting](https://github.com/mborzenkov/Algorithms-in-Java/blob/master/docs/sortings/counting-sort.md)
+    [Counting](../docs/sortings/counting-sort.md)
     Insertion
     Merge
     Quick
-    Radix
+    [Radix](../docs/sortings/radix-sort.md)
     Selection
 ##  Tree
     -
