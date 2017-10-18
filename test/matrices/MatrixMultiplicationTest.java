@@ -2,6 +2,7 @@ package matrices;
 
 import static org.junit.Assert.assertEquals;
 
+import datastructures.trees.BinaryTree;
 import org.junit.Test;
 
 /** Tests MatrixMultiplication class by multiplying matrices and checking results. */
@@ -20,9 +21,10 @@ public class MatrixMultiplicationTest {
 
     private static final Matrix ZERO_MATRIX = new Matrix.Builder(2, 2).build();
 
-    private static final Matrix SQUARE_MATRIX = new Matrix.Builder(2, 2)
-            .set(0,0, 1).set(0,1,2)
-            .set(1,0,1).set(1,1,-1).build();
+    private static final Matrix SQUARE_MATRIX = Matrix.fromArray(new int[][] {
+        new int[] {1, 2},
+        new int[] {1, -1}
+    });
     // SQUARE (2, 2) * SQUARE (2, 2) => ANSWER (2, 2)
     private static final Matrix SQUARE_MATRIX_ANSWER = Matrix.fromArray(new int[][] {
         new int[] {3, 0},
@@ -59,6 +61,12 @@ public class MatrixMultiplicationTest {
     private static final Matrix NON_SQUARE_MATRIX_ANSWER = Matrix.fromArray(new int[][] {
         new int[] {6},
         new int[] {0}
+    });
+
+    // SQUARE (2, 2) * SQUARE (2, 2) * NON_SQUARE (2, 1) => ANSWER (2,1)
+    private static final Matrix CHAIN_ANSWER = Matrix.fromArray(new int[][] {
+        new int[] {6},
+        new int[] {6}
     });
 
     @Test
@@ -99,6 +107,22 @@ public class MatrixMultiplicationTest {
         assertEquals(SQUARE_MATRIX_ANSWER, MatrixMultiplication.multStrassenSquaredPow2(SQUARE_MATRIX, SQUARE_MATRIX));
         assertEquals(SQUARE_MATRIX_ANSWER_2,
                 MatrixMultiplication.multStrassenSquaredPow2(SQUARE2_MATRIX_2, SQUARE2_MATRIX_2));
+    }
+
+    @Test
+    public void testChainMultiplication() {
+        assertEquals(CHAIN_ANSWER, MatrixMultiplication.computeMultChain(
+                new BinaryTree<>(
+                        new BinaryTree<>(SQUARE_MATRIX, SQUARE_MATRIX),
+                        new BinaryTree<>(NON_SQUARE_MATRIX))));
+        assertEquals(CHAIN_ANSWER, MatrixMultiplication.computeMultChain(
+                new BinaryTree<>(
+                        new BinaryTree<>(SQUARE_MATRIX),
+                        new BinaryTree<>(SQUARE_MATRIX, NON_SQUARE_MATRIX))));
+        assertEquals(ZERO_MATRIX, MatrixMultiplication.computeMultChain(
+                new BinaryTree<>(
+                        new BinaryTree<>(ZERO_MATRIX),
+                        new BinaryTree<>(SQUARE_MATRIX, SQUARE_MATRIX))));
     }
 
 }

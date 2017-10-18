@@ -1,6 +1,7 @@
 package matrices;
 
 import com.sun.istack.internal.NotNull;
+import datastructures.trees.BinaryTree;
 import util.AlgorithmsUtils;
 
 /** This class contain methods for multiplying matrices.
@@ -322,4 +323,22 @@ public class MatrixMultiplication {
 
     }
 
+    /** Computes the result of matrix multiplication chain presented as binary tree.
+     * For node computes leftChild * rightChild.
+     * For more info on multiplication see {@link MatrixMultiplication#mult(Matrix, Matrix)}.
+     *
+     * @param multChain matrix multiplication chain presented as binary tree, not null
+     *
+     * @return matrix as a result of multiplication all matrices sequentially
+     *
+     * @throws IllegalArgumentException if multChain is not consistent (matrices can't be multiplied)
+     * @throws NullPointerException if multChain is null
+     */
+    public static @NotNull Matrix computeMultChain(@NotNull BinaryTree<Matrix> multChain) {
+        final Matrix value = multChain.getValue();
+        if (value != null) {
+            return value;
+        }
+        return mult(computeMultChain(multChain.getLeft()), computeMultChain(multChain.getRight()));
+    }
 }
