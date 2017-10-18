@@ -1,11 +1,16 @@
 package util;
 
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
+
+import java.util.Objects;
 
 /** Immutable object representing binary tree - data structure that contain value (leaf)
  * or binary trees on left and right (node).
  * Immutability does not apply to value if value is mutable data type. This ADT ensure that stored link to value
  * is never changed, but value content can be changed outside.
+ *
+ * @param <T> type of values in BinaryTree
  */
 public class BinaryTree<T> {
 
@@ -16,7 +21,7 @@ public class BinaryTree<T> {
     //      value is any not null data if this tree is leaf or null if this tree is node
     //
     // Abstraction function:
-    //      represents binary tree - tree data structure of nodes and leafs
+    //      represents binary tree - tree data structure of nodes and leaves
     //
     // Safety from rep exposure:
     //      this ADT is immutable and has no mutators
@@ -27,11 +32,11 @@ public class BinaryTree<T> {
     //      this ADT is thread safe as long as T is thread safe (because only value could be mutable)
 
     /** Left part of tree or null if this is leaf. */
-    private final BinaryTree<T> left;
+    private final @Nullable BinaryTree<T> left;
     /** Right part of tree or null if this is leaf. */
-    private final BinaryTree<T> right;
+    private final @Nullable BinaryTree<T> right;
     /** Value or null if this is node. */
-    private final T value;
+    private final @Nullable T value;
 
     /** Creates new leaf.
      *
@@ -48,7 +53,7 @@ public class BinaryTree<T> {
         this.value = value;
     }
 
-    /** Creates new node with 2 leafs.
+    /** Creates new node with 2 leaves.
      *
      * @param value1 value of left leaf, not null
      * @param value2 value of right leaf, not null
@@ -85,7 +90,7 @@ public class BinaryTree<T> {
      *
      * @return left tree if this tree is node or null if this tree is leaf
      */
-    public BinaryTree<T> getLeft() {
+    public @Nullable BinaryTree<T> getLeft() {
         return left;
     }
 
@@ -95,7 +100,7 @@ public class BinaryTree<T> {
      *
      * @return right tree if this tree is node or null if this tree is leaf
      */
-    public BinaryTree<T> getRight() {
+    public @Nullable BinaryTree<T> getRight() {
         return right;
     }
 
@@ -105,8 +110,56 @@ public class BinaryTree<T> {
      *
      * @return value if this tree is leaf or null if this tree is node
      */
-    public T getValue() {
+    public @Nullable T getValue() {
         return value;
     }
 
+    /** Check if two objects are eqaul.
+     * This implementation is recursive and have time complexity of O(n * m), where n is number of nodes and leaves
+     * in tree and m is time complexity of value equals.
+     *
+     * @param otherObject object to compare with
+     *
+     * @return true if this eqaul thatObject: if they are both leaves than values are equal,
+     *      else lefts and rights are equal
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+        if (otherObject == null || getClass() != otherObject.getClass()) {
+            return false;
+        }
+        BinaryTree<?> that = (BinaryTree<?>) otherObject;
+        if (value != null) {
+            return value.equals(that.value);
+        } else {
+            return left != null && right != null && left.equals(that.left) && right.equals(that.right);
+        }
+    }
+
+    /** Return hashcode of binary tree, based on its content. */
+    @Override
+    public int hashCode() {
+        return Objects.hash(left, right, value);
+    }
+
+    /** Returns human readable representation of binary tree.
+     *  This implementation is recursive and have time complexity of O(n * m), where n is number of nodes and leaves
+     * in tree and m is time complexity of value toString.
+     *
+     * @return value.toString() for each leaf, "[left.toString, right.toString]" for each node
+     */
+    @Override
+    public String toString() {
+        if (value != null) {
+            return value.toString();
+        }
+        if (left != null && right != null) {
+            return String.format("[%s, %s]", left.toString(), right.toString());
+        } else {
+            return "";
+        }
+    }
 }
