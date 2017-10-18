@@ -1,5 +1,6 @@
 package util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -23,6 +24,16 @@ public class AlgorithmsUtilsTest {
         assertFalse(AlgorithmsUtils.isPowerOfTwo(3));
         assertFalse(AlgorithmsUtils.isPowerOfTwo(7));
         assertFalse(AlgorithmsUtils.isPowerOfTwo(12));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIsPowerOfTwoExceptionZero() {
+        assertEquals(false, AlgorithmsUtils.isPowerOfTwo(0));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIsPowerOfTwoExceptionNegative() {
+        assertEquals(false, AlgorithmsUtils.isPowerOfTwo(-1));
     }
 
 }
