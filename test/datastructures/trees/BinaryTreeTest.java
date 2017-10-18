@@ -1,9 +1,10 @@
-package util;
+package datastructures.trees;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import datastructures.trees.BinaryTree;
 import org.junit.Test;
 
 /** Tests BinaryTree implementation in util. */

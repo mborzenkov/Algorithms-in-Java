@@ -1,4 +1,4 @@
-package util;
+package datastructures.trees;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
