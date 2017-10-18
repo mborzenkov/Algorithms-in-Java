@@ -57,6 +57,6 @@ Implemented algorithm returns binary tree corresponding to optimal multiplicatio
 
 Implementation is very similar to the pseudocode above, except that instead of returning numbers it returns pairs of minimum number of multiplication from `i` to `j` and binary tree. Pairs are stored in 2d array similar to `M`.
 
-[Implementation](../../src/matrices/MatrixChainMultiplication.java)
+[Implementation](/src/matrices/MatrixChainMultiplication.java)
 
 [Testing class](../../test/matrices/MatrixChainMultiplicationTest.java)
