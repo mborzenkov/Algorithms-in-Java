@@ -61,7 +61,7 @@ public class MatrixChainMultiplication {
             }
         }
         // compute result
-        return multChainRecursive(input, 0, input.length, new Result[input.length][input.length]).multChain;
+        return multChainRecursive(input, 0, input.length - 1, new Result[input.length][input.length + 1]).multChain;
     }
 
     /** Recursively computes the optimal chain for multiplying matrices [from..to] in input.
@@ -70,8 +70,8 @@ public class MatrixChainMultiplication {
      *
      * @param input sequence of matrices for multiplication, not null, all martices must be consistent
      *              (can be multiplied sequentially). consistency is not checked.
-     * @param from starting index, 0 <= from < to
-     * @param to ending index, from < to <= input.length
+     * @param from starting index, 0 <= from <= to
+     * @param to ending index, from <= to < input.length
      * @param cache 2d array of results where cache[i][j] is optimal result for multiplying matrices [i..j]
      *
      * @return optimal result containing minimum number of operations for multiplying matrices [from..to]
@@ -81,7 +81,7 @@ public class MatrixChainMultiplication {
                                                       @NotNull Result[][] cache) {
         if (cache[from][to] != null) {
             return cache[from][to]; // return from cache if exists
-        } else if (from == to - 1) {
+        } else if (from == to) {
             // single matrix, save to cache and return
             cache[from][to] = new Result(0, new BinaryTree<>(input[from]));
             return cache[from][to];
