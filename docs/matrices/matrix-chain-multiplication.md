@@ -59,4 +59,4 @@ Implementation is very similar to the pseudocode above, except that instead of r
 
 [Implementation](/src/matrices/MatrixChainMultiplication.java)
 
-[Testing class](../../test/matrices/MatrixChainMultiplicationTest.java)
+[Testing class](/test/matrices/MatrixChainMultiplicationTest.java)
