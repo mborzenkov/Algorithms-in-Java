@@ -8,6 +8,8 @@ import org.junit.Test;
 /** Tests MatrixChainMultiplication class. */
 public class MatrixChainMultiplicationTest {
 
+    // TODO: Improve testing strategy, add more tests
+
     // [n * m] * [m * p] => [n * p]
 
     /* Testing strategy:
