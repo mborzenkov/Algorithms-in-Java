@@ -96,7 +96,7 @@ public class BinaryTree<T> {
      * @return right tree if this tree is node or null if this tree is leaf
      */
     public BinaryTree<T> getRight() {
-        return left;
+        return right;
     }
 
     /** Return value.
