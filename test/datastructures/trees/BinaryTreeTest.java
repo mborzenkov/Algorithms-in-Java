@@ -156,31 +156,25 @@ public class BinaryTreeTest {
 
     // covers: exceptions...
 
-    @Test
+    @Test(expected =  IllegalArgumentException.class)
     public void testExceptionNullLeaf() {
-        final Object value = new Object();
-        BinaryTree<Object> leaf = new BinaryTree<>(value);
-        assertEquals(null, leaf.getLeft());
-        assertEquals(null, leaf.getRight());
-        assertTrue(value == leaf.getValue());
+        final Object value = null;
+        final BinaryTree<Object> leaf = new BinaryTree<>(value);
+        assertEquals(null, leaf);
     }
 
-    @Test
+    @Test(expected =  IllegalArgumentException.class)
     public void testExceptionNullNodeTwoLeafs() {
-        final Object value = new Object();
-        BinaryTree<Object> leaf = new BinaryTree<>(value);
-        assertEquals(null, leaf.getLeft());
-        assertEquals(null, leaf.getRight());
-        assertTrue(value == leaf.getValue());
+        final Object value = null;
+        final BinaryTree<Object> leaf = new BinaryTree<>(value, value);
+        assertEquals(null, leaf);
     }
 
-    @Test
+    @Test(expected =  IllegalArgumentException.class)
     public void testExceptionNullTree() {
-        final Object value = new Object();
-        BinaryTree<Object> leaf = new BinaryTree<>(value);
-        assertEquals(null, leaf.getLeft());
-        assertEquals(null, leaf.getRight());
-        assertTrue(value == leaf.getValue());
+        final BinaryTree<Object> leaf = null;
+        final BinaryTree<Object> node = new BinaryTree<>(leaf, leaf);
+        assertEquals(null, node);
     }
 
 

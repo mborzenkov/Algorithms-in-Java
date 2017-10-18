@@ -44,7 +44,7 @@ public class BinaryTree<T> {
      *
      * @throws IllegalArgumentException if value == null
      */
-    public BinaryTree(T value) {
+    public BinaryTree(@NotNull T value) {
         if (value == null) {
             throw new IllegalArgumentException("Error @ new BinaryTree(T value) :: value is null");
         }
@@ -60,7 +60,7 @@ public class BinaryTree<T> {
      *
      @throws IllegalArgumentException if value1 or value2 == null
      */
-    public BinaryTree(T value1, T value2) {
+    public BinaryTree(@NotNull T value1, @NotNull T value2) {
         if (value1 == null || value2 == null) {
             throw new IllegalArgumentException("Error @ new BinaryTree(T arg1, T arg2) :: some arguments == null");
         }
