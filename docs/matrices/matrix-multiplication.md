@@ -6,6 +6,11 @@ Memory: O(n)
 Matrices `A` and `B` can be multiplied if they are consistent e.g. number of columns in `A` equals number of rows in `B`.
 Result of multiplying matrix `A (m * n)` and matrix `B (n * p)` is matrix `C = AB (m * p)`. For each element in `C`: `C[i][j] = sum(k=1..n) a[i][j] * b[k][j]`.
 
+Properties:
+- The matrix product is associative `ABC = A(BC) = (AB)C`.
+- Multiplication is not commutative `AB != BA`.
+- Multiplication is distributive over addition `A(B + C) = AB + AC`, `(A + B)C = AC + BC`.
+
 ## Simple multiplication
 ```
 Square-Matrix-Multiply(A, B)
