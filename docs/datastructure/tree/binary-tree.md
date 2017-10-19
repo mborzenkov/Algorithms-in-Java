@@ -15,6 +15,6 @@ Complexity of insertions and deletions depends on implementation. For observers 
 ## Implementation
 Simple immutable binary tree that can be created and observed only recursively. Each node has exactly 2 children. Each leaf contain value.
 
-[Implementation](/src/datastructures/trees/BinaryTree.java)
+[Implementation](/src/datastructure/tree/BinaryTree.java)
 
-[Testing class](/test/datastructures/trees/BinaryTreeTest.java)
+[Testing class](/test/datastructure/tree/BinaryTreeTest.java)
