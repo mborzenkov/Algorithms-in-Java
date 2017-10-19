@@ -51,6 +51,6 @@ public static void countingSort(int[] input, int k) {
 ## Improved
 Used for sorting any integer keys in specified range, where keys are any column in 2d array (used in Radix Sort).
 
-[Implementation](../../src/sortings/CountingSort.java)
+[Implementation](/src/sortings/CountingSort.java)
 
-[Testing class](../../test/sortings/CountingSortTest.java)
+[Testing class](/test/sortings/CountingSortTest.java)
