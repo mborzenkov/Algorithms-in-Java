@@ -17,6 +17,9 @@ import util.AlgorithmsUtils;
 @SuppressWarnings("WeakerAccess")
 public class MatrixMultiplication {
 
+    // TODO: memory optimization of multiplication algorithms
+    // TODO: recursive, strassen with not square matrices and not pow2
+
     private MatrixMultiplication() {
         throw new UnsupportedOperationException(
                 "Error @ new MatrixMultiplication() :: MatrixMultiplication is noninstantiable static class");
