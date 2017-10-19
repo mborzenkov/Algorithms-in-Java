@@ -149,7 +149,7 @@ public class BinaryTreeTest {
         final BinaryTree<String> tree2 = new BinaryTree<>(tree1, tree1);
         assertEquals(String.format("[%s, %s]", expected, expected), tree2.toString());
 
-        // disbalanced tree
+        // unbalanced tree
         final BinaryTree<String> tree3 = new BinaryTree<>(tree1, leaf1);
         assertEquals(String.format("[%s, %s]", expected, value1), tree3.toString());
     }

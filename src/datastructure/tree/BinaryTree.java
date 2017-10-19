@@ -114,13 +114,13 @@ public class BinaryTree<T> {
         return value;
     }
 
-    /** Check if two objects are eqaul.
+    /** Check if two objects are equal.
      * This implementation is recursive and have time complexity of O(n * m), where n is number of nodes and leaves
      * in tree and m is time complexity of value equals.
      *
      * @param otherObject object to compare with
      *
-     * @return true if this eqaul thatObject: if they are both leaves than values are equal,
+     * @return true if this equal thatObject: if they are both leaves than values are equal,
      *      else lefts and rights are equal
      */
     @Override

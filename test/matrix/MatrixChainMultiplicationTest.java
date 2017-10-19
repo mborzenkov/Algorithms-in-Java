@@ -6,6 +6,7 @@ import datastructure.tree.BinaryTree;
 import org.junit.Test;
 
 /** Tests MatrixChainMultiplication class. */
+@SuppressWarnings("CheckStyle")
 public class MatrixChainMultiplicationTest {
 
     // TODO: Improve testing strategy, add more tests
@@ -63,12 +64,13 @@ public class MatrixChainMultiplicationTest {
     // covers: exceptions..
 
     @Test(expected = IllegalArgumentException.class)
-    public void testEmptyMartix() {
+    public void testEmptyMatrix() {
         final BinaryTree<Matrix> result = MatrixChainMultiplication.pickOptimalMultiplicationChain(new Matrix[0]);
+        assertEquals(null, result);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNotConsistentMartices() {
+    public void testNotConsistentMatrices() {
         final Matrix matrA = new Matrix.Builder(5, 5).build();
         final Matrix matrB = new Matrix.Builder(3, 5).build();
         final Matrix matrC = new Matrix.Builder(5, 5).build();

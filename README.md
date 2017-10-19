@@ -15,7 +15,7 @@ Examples of popular algorithms in Java. Specified, tested and implemented.
 - [Binary tree](./docs/datastructure/tree/binary-tree.md)
 ##  Matrix
 - [Matrix ADT](./docs/matrix/matrix.md)
-- [Addition, Subtraction](./docs/matrix/matrix-addition-substraction.md)
+- [Addition, Subtraction](./docs/matrix/matrix-addition-subtraction.md)
 - [Multiplication](./docs/matrix/matrix-multiplication.md)
 - [Chain Multiplication](./docs/matrix/matrix-chain-multiplication.md)
 ##  Problem

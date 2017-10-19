@@ -8,6 +8,7 @@ import datastructure.tree.BinaryTree;
  * `A1 A2 .. An`, where `A[i]` is matrix `p[i] * r[i]` and `r[i] = p[i + 1]` for `i = 1 .. n-1`.
  * All matrices in input are consistent (can be multiplied sequentially).
  */
+@SuppressWarnings("WeakerAccess")
 public class MatrixChainMultiplication {
 
     /** Error for illegal argument meaning broken consistency of input. */
@@ -39,7 +40,7 @@ public class MatrixChainMultiplication {
     /** Computes the optimal chain for multiplying matrices in input.
      * Multiplying of result can be done with special function in `MatrixMultiplication` package.
      *
-     * @param input nonsequence of matrices for multiplication, not null, not empty, all martices must be consistent
+     * @param input sequence of matrices for multiplication, not null, not empty, all matrices must be consistent
      *              (can be multiplied sequentially).
      *
      * @return binary tree corresponding to optimal multiplication sequence, for each node multiply left * right
@@ -68,7 +69,7 @@ public class MatrixChainMultiplication {
      * Returns cached result if exists.
      * Number of operations for multiplying 2 matrices p * q and q * r is computed as `p * q * r`.
      *
-     * @param input sequence of matrices for multiplication, not null, all martices must be consistent
+     * @param input sequence of matrices for multiplication, not null, all matrices must be consistent
      *              (can be multiplied sequentially). consistency is not checked.
      * @param from starting index, 0 <= from <= to
      * @param to ending index, from <= to < input.length

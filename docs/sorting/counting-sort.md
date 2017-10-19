@@ -13,7 +13,7 @@ There are two variations of algorithm:
   1. Let's create `c` - array size `k`, where each element is a counter for each possible key value.
   At first, `c[i] = 0`.
   2. Then iterate through the input array and increment associated counters `for i = 1..n c[a_i]++`.
-  3. Result array `res` is an array of size `n` splitted into segments `S[1]..S[k-1]`, where `|S[i]| = c[i]`. For filling the result we also need an array of iterators `b` size `k`, where each element points to current position where element `a[i]` must be placed in `res` (at first, each iterator points to the beginning of the corresponding segment). `b[i] = sum[i<j] c[j]`. We can calculate `b` above `c` in one pass.
+  3. Result array `res` is an array of size `n` divided into segments `S[1]..S[k-1]`, where `|S[i]| = c[i]`. For filling the result we also need an array of iterators `b` size `k`, where each element points to current position where element `a[i]` must be placed in `res` (at first, each iterator points to the beginning of the corresponding segment). `b[i] = sum[i<j] c[j]`. We can calculate `b` above `c` in one pass.
   4. Having `b` and `res` we can iterate through input and put each `a[i]` in appropriate segment of `res`:
   `res[ b[ a[i] ] ] = a[i]; ++b[a_i]`.
 

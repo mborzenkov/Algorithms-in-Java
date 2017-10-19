@@ -1,4 +1,4 @@
-# Matrix addition and substraction
+# Matrix addition and subtraction
 ```
 Time: O(n)
 Memory: O(1)

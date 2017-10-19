@@ -105,7 +105,7 @@ public class RadixSortTest {
         testAllSorts(SortingTypes.ARRAYS_PARALLEL_SORT);
     }
 
-    /** Testing Readix sort. */
+    /** Testing Radix sort. */
     @Test
     public void testRadixSort() {
         testAllSorts(SortingTypes.RADIX);
