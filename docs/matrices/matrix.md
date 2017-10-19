@@ -6,6 +6,6 @@ Matrix can be a vector if it has size `n * 1` or row-vector with size `1 * n`.
 Matrix implemented as an immutable object. Creation of matrix is available from array (with static factory method) or using builder.
 It supports operations of observing dimensions and content and has no mutators.
 
-[Implementation](/src/matrices/Matrix.java)
+[Implementation](/src/matrix/Matrix.java)
 
-[Testing class](/test/matrices/MatrixTest.java)
+[Testing class](/test/matrix/MatrixTest.java)

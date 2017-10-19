@@ -20,6 +20,6 @@ Result can be produced in-place with constant additional memory `O(1)`.
 ## Implementation
 Not-in-place implementation of addition and subtraction.
 
-[Implementation](/src/matrices/MatrixAddSub.java)
+[Implementation](/src/matrix/MatrixAddSub.java)
 
-[Testing class](/test/matrices/MatrixAddSubTest.java)
+[Testing class](/test/matrix/MatrixAddSubTest.java)

@@ -57,7 +57,7 @@ Algorithm has 4 steps:
 `C11=P5+P4-P2+P6 ; C12=P1+P2 ; C21=P3+P4 ; C22=P5+P1-P3-P7`
 
 ## Chain multiplication
-Matrix chain multiplication is optimization problem of finding the most efficient way to multiply matrices `A1 A2 .. An`. Algorithm for finding optimal chain given in the `MatrixChainMultiplication` package. Optimal chain is presented as binary tree.
+Matrix chain multiplication is optimization problem of finding the most efficient way to multiply matrices `A1 A2 .. An`. Algorithm for finding optimal chain given in the `MatrixChainMultiplication` class. Optimal chain is presented as binary tree.
 Chain multiplication algorithm is multiplying matrices `A1 A2 .. An` in given order: for node computes `leftChild * rightChild`.
 
 ## Complexity
@@ -68,6 +68,6 @@ Chain multiplication algorithm is multiplying matrices `A1 A2 .. An` in given or
 ## Implementation
 Implementation consist of 3 algorithms: basic, recursive (only for squared matrices which dimensions are power of 2) and strassen (same constraints as for recursive).
 
-[Implementation](/src/matrices/MatrixMultiplication.java)
+[Implementation](/src/matrix/MatrixMultiplication.java)
 
-[Testing class](/test/matrices/MatrixMultiplicationTest.java)
+[Testing class](/test/matrix/MatrixMultiplicationTest.java)
