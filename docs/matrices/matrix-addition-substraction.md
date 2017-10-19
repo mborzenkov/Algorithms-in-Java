@@ -14,7 +14,7 @@ Properties:
 - Existence of opposite matrix: `A + (-A) = 0`
 
 ## Complexity
-Algorithm have time complexity of `O(n)`, where `n` is number of elements in `A` (or `B`, because they have the same number of elements).
+Algorithm has time complexity of `O(n)`, where `n` is number of elements in `A` (or `B`, because they have the same number of elements).
 Result can be produced in-place with constant additional memory `O(1)`.
 
 ## Implementation

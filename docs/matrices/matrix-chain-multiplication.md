@@ -17,7 +17,7 @@ Algorithm is relatively simple:
 for every `k` from `i to j - 1` compute `res = f(i, k) + f(k + 1, j) + p[i] * r[k] * q[j]`.
 - Remember the best result and return it at the end.
 
-This algorithm have time complexity `O(2^n)` due to repeatedly executing same operations. We can optimize it to `O(n^3)` using cache for minimums.
+This algorithm has time complexity `O(2^n)` due to repeatedly executing same operations. We can optimize it to `O(n^3)` using cache for minimums.
 - Add 2d array `M (n * n)`, where `M[i][j]` is minimum number of operations for multiplying matrices from `A[i]` to `A[j]`.
 - Compute `MinMult(i, j)` only if `M[i][j]` is not present.
 - Save `M[i][j] = best` at the end of `MinMult(i, j)`.

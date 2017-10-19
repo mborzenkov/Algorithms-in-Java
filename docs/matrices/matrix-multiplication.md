@@ -45,7 +45,7 @@ Square-Matrix-Multiply-Recursive(A, B)
 ```
 
 ## Strassen's algorithm
-More effective algorithm for matrix multiplication that save 1 multiplication and thus have complexity of `O(n^2.81)` instead of `O(n^3)`.
+More effective algorithm for matrix multiplication that save 1 multiplication and thus has complexity of `O(n^2.81)` instead of `O(n^3)`.
 Algorithm has 4 steps:
 1. Divide matrices `A`, `B` and output matrix `C` on submatrices size `n/2 * n/2` (no actual dividing needed, use indexes).
 2. Create 10 matrices `S1, S2, ... , S10` size `n/2 * n/2` each.
@@ -61,8 +61,8 @@ Matrix chain multiplication is optimization problem of finding the most efficien
 Chain multiplication algorithm is multiplying matrices `A1 A2 .. An` in given order: for node computes `leftChild * rightChild`.
 
 ## Complexity
-- Basic multiplication algorithm have time complexity `O(mnp)` for multiplication of matrices `A (m * n) * B (n * p)`.
-- Strassen's algorithm have time complexity `O(n^2.81)` for multiplication of matrices `A (n * n) * B (n * n)`.
+- Basic multiplication algorithm has time complexity `O(mnp)` for multiplication of matrices `A (m * n) * B (n * p)`.
+- Strassen's algorithm has time complexity `O(n^2.81)` for multiplication of matrices `A (n * n) * B (n * n)`.
 - Both algorithms are not-in-place and requires `O(n)` additional memory for storing the result.
 
 ## Implementation
